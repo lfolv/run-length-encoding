@@ -6,18 +6,11 @@ class RunLengthEncoding {
   }
 
   static decode(encodedText: string) {
-    const chunks = encodedText.match(/(\d*\D)/g) || []
+    return encodedText.replace(/(\d*)?(\D)/g, (_, length: string, character: string) => {
+      const times = Number(length) || 1
 
-    return chunks.reduce((plaintext: string, chunk: string) =>
-      plaintext + RunLengthEncoding.decodeChunk(chunk)
-      , '')
-  }
-
-  static decodeChunk(chunk: string) {
-    const times = Number(chunk.slice(0, -1)) || 1
-    const character = chunk[chunk.length - 1]
-
-    return character.repeat(times)
+      return character.repeat(times)
+    })
   }
 }
 
