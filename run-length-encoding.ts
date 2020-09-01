@@ -6,10 +6,8 @@ class RunLengthEncoding {
   }
 
   static decode(encodedText: string) {
-    return encodedText.replace(/(\d*)?(\D)/g, (_, length: string, character: string) => {
-      const times = Number(length) || 1
-
-      return character.repeat(times)
+    return encodedText.replace(/(\d+)(\D)/g, (_, times: string, character: string) => {
+      return character.repeat(Number(times))
     })
   }
 }
